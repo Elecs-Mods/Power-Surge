@@ -1,8 +1,10 @@
 package elec332.powersurge.surge;
 
 import elec332.powersurge.main.PowerSurge;
+import elec332.powersurge.network.PacketSetSurgeData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -14,11 +16,11 @@ public class SurgeData implements IExtendedEntityProperties{
 
     Entity entity;
     int charge;
-    int oldCharge;
+
+    private int tickCounter = 0;
 
     public SurgeData(){
         this.charge = 0;
-        this.oldCharge = 0;
     }
 
     public static SurgeData get(EntityLivingBase player){
@@ -26,22 +28,39 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void tick(){
-        this.oldCharge = charge;
-        if (this.charge > 0)
-            this.charge--;
+        if (this.tickCounter >= 10) {
+            if (this.charge > 10)
+                this.addCharge(-10);
+            else if (this.charge != 0)
+                this.setCharge(0);
+            this.tickCounter = 0;
+        }
+        this.tickCounter++;
     }
 
     public int getCharge() {
-        return charge;
+        return this.charge;
     }
 
     public void setCharge(int charge) {
-        this.oldCharge = this.charge;
-        this.charge = charge;
+        if (charge <= PowerSurge.max_Charge)
+            this.charge = charge;
+        else
+            this.charge = PowerSurge.max_Charge;
+        this.sendData();
     }
 
-    public int getOldCharge() {
-        return oldCharge;
+    public void addCharge(int toAdd){
+        int newCharge  = this.charge+toAdd;
+        this.setCharge(newCharge);
+    }
+
+    private void sendData(){
+        if (entity instanceof EntityPlayerMP) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setIntArray("data", new int[]{this.getCharge()});
+            PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) entity);
+        }
     }
 
     @Override
@@ -52,9 +71,7 @@ public class SurgeData implements IExtendedEntityProperties{
     @Override
     public void loadNBTData(NBTTagCompound compound) {
         if (compound != null){
-            int c = compound.getInteger("Charge");
-            this.charge = c;
-            this.oldCharge = c;
+            this.charge = compound.getInteger("Charge");
         }
     }
 

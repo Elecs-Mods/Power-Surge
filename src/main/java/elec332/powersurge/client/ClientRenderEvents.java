@@ -14,12 +14,9 @@ import org.lwjgl.opengl.GL11;
  */
 public class ClientRenderEvents extends GuiIngameForge{
 
-    public ClientRenderEvents(Minecraft minecraft){
+    public ClientRenderEvents(Minecraft minecraft) {
         super(minecraft);
-        //mc = minecraft;
     }
-
-    //private static Minecraft mc;
 
     @SubscribeEvent
     public void eventHandler(RenderGameOverlayEvent event){
@@ -31,19 +28,20 @@ public class ClientRenderEvents extends GuiIngameForge{
         int height = res.getScaledHeight();
         mc.getTextureManager().bindTexture(icons);
         GL11.glColor4f(0.04456778F, 0.96788767F, 0.745644F, 0.7F);
+        //GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(GL11.GL_BLEND);
 
         if (mc.playerController.gameIsSurvivalOrAdventure()) {
             short barWidth = 182;
-            int charge = SurgeData.get(mc.thePlayer).getCharge();
-            int filled = (int)((charge / PowerSurge.max_Charge) * (float)(barWidth + 1));
+            int filled = (int)(((float)SurgeData.get(mc.thePlayer).getCharge() / PowerSurge.max_Charge) * (float)(barWidth + 1));
             int top = height - 32 + 3;
-            drawTexturedModalRect(3, top, 0, 64, barWidth, 5);
+            drawTexturedModalRect(5, top, 0, 64, barWidth, 5);
             if (filled > 0) {
-                drawTexturedModalRect(0, top, 0, 69, filled, 5);
+                drawTexturedModalRect(5, top, 0, 69, filled, 5);
             }
         }
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); //*/
     }
 }
+

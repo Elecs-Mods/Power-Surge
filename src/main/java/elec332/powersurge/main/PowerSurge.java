@@ -1,5 +1,6 @@
 package elec332.powersurge.main;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -13,6 +14,7 @@ import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
 import elec332.core.network.NetworkHandler;
 import elec332.powersurge.eventhandlers.PlayerEvents;
+import elec332.powersurge.eventhandlers.SurgeHandler;
 import elec332.powersurge.init.BlockRegister;
 import elec332.powersurge.init.CommandRegister;
 import elec332.powersurge.init.ItemRegister;
@@ -31,7 +33,7 @@ public class PowerSurge extends ModBase {
 
     public static final String ModName = "Power Surge"; //Human readable name
     public static final String ModID = "PowerSurge";  //modid
-    public static final int max_Charge = 20000;
+    public static int max_Charge = 20000;
 
     @SidedProxy(clientSide = "elec332.powersurge.proxies.ClientProxy", serverSide = "elec332.powersurge.proxies.CommonProxy")
     public static CommonProxy proxy;
@@ -63,9 +65,10 @@ public class PowerSurge extends ModBase {
         loadConfiguration();
         ItemRegister.instance.init(event);
         BlockRegister.instance.init(event);
-        //register items/blocks
         proxy.registerRenders();
         MinecraftForge.EVENT_BUS.register(new PlayerEvents());
+        FMLCommonHandler.instance().bus().register(new PlayerEvents());
+        MinecraftForge.EVENT_BUS.register(new SurgeHandler());
 
         notifyEvent(event);
     }
