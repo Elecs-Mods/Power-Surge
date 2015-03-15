@@ -1,7 +1,6 @@
 package elec332.powersurge.abilities;
 
 import elec332.powersurge.api.IAbility;
-import elec332.powersurge.lib.EnumAbilityType;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
