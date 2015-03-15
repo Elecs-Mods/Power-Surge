@@ -1,6 +1,7 @@
 package elec332.powersurge.proxies;
 
 import elec332.powersurge.client.ClientRenderEvents;
+import elec332.powersurge.client.KeyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -14,5 +15,10 @@ public class ClientProxy extends CommonProxy{
     @Override
     public void registerRenders() {
         MinecraftForge.EVENT_BUS.register(new ClientRenderEvents(minecraft));
+    }
+
+    @Override
+    public void registerKeys() {
+        new KeyHandler().init();
     }
 }

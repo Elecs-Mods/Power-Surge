@@ -13,13 +13,16 @@ import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
 import elec332.core.network.NetworkHandler;
+import elec332.powersurge.abilities.Jump;
 import elec332.powersurge.eventhandlers.PlayerEvents;
 import elec332.powersurge.eventhandlers.SurgeHandler;
 import elec332.powersurge.init.BlockRegister;
 import elec332.powersurge.init.CommandRegister;
 import elec332.powersurge.init.ItemRegister;
+import elec332.powersurge.network.PacketHandleKeyInput;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.proxies.CommonProxy;
+import elec332.powersurge.surge.SurgeRegistry;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
@@ -48,6 +51,8 @@ public class PowerSurge extends ModBase {
         loadConfiguration();
         networkHandler = new NetworkHandler(ModInfoHelper.getModID(event));
         networkHandler.registerClientPacket(PacketSetSurgeData.class);
+        networkHandler.registerServerPacket(PacketHandleKeyInput.class);
+        initAbilities();
         ItemRegister.instance.preInit(event);
         BlockRegister.instance.preInit(event);
         //setting up mod stuff
@@ -66,6 +71,7 @@ public class PowerSurge extends ModBase {
         ItemRegister.instance.init(event);
         BlockRegister.instance.init(event);
         proxy.registerRenders();
+        proxy.registerKeys();
         MinecraftForge.EVENT_BUS.register(new PlayerEvents());
         FMLCommonHandler.instance().bus().register(new PlayerEvents());
         MinecraftForge.EVENT_BUS.register(new SurgeHandler());
@@ -84,6 +90,11 @@ public class PowerSurge extends ModBase {
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         CommandRegister.instance.init(event);
+    }
+
+
+    void initAbilities(){
+        SurgeRegistry.registerAbility(new Jump());
     }
 
     File cfg;
