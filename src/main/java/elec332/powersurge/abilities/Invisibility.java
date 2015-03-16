@@ -7,27 +7,26 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 /**
- * Created by Elec332 on 14-3-2015.
+ * Created by Elec332 on 16-3-2015.
  */
-public class Jump implements IAbility {
+public class Invisibility implements IAbility {
     @Override
     public String getName() {
-        return "jump";
+        return "invisibility";
     }
 
     @Override
     public int getCost() {
-        return 200;
+        return 2000;
     }
 
     @Override
     public void onActivated(EntityPlayerMP player) {
-        player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 400, 5));
+        player.addPotionEffect(new PotionEffect(Potion.invisibility.getId(), 200, 5));
         SurgeData.get(player).deActivateAbility();
     }
 
     @Override
     public void onDeActivated(EntityPlayerMP player) {
-        //Nope
     }
 }

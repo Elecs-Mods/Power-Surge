@@ -4,6 +4,8 @@ import elec332.core.client.KeyHandlerBase;
 import elec332.powersurge.lib.EnumKeyType;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketHandleKeyInput;
+import elec332.powersurge.surge.SurgeData;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.input.Keyboard;
@@ -33,6 +35,9 @@ public class KeyHandler extends KeyHandlerBase {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setInteger("type", EnumKeyType.valueOf(key.getKeyDescription().toUpperCase()).ordinal());
             PowerSurge.networkHandler.getNetworkWrapper().sendToServer(new PacketHandleKeyInput(compound));
+            if (EnumKeyType.valueOf(key.getKeyDescription().toUpperCase()) != EnumKeyType.ACTIVATE){
+                SurgeData.get(Minecraft.getMinecraft().thePlayer).pressKey(EnumKeyType.valueOf(key.getKeyDescription().toUpperCase()));
+            }
         }
     }
 

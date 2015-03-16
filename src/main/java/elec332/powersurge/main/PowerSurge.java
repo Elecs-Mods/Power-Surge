@@ -13,12 +13,14 @@ import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
 import elec332.core.network.NetworkHandler;
+import elec332.powersurge.abilities.Invisibility;
 import elec332.powersurge.abilities.Jump;
 import elec332.powersurge.eventhandlers.PlayerEvents;
 import elec332.powersurge.eventhandlers.SurgeHandler;
 import elec332.powersurge.init.BlockRegister;
 import elec332.powersurge.init.CommandRegister;
 import elec332.powersurge.init.ItemRegister;
+import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketHandleKeyInput;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.proxies.CommonProxy;
@@ -52,6 +54,7 @@ public class PowerSurge extends ModBase {
         networkHandler = new NetworkHandler(ModInfoHelper.getModID(event));
         networkHandler.registerClientPacket(PacketSetSurgeData.class);
         networkHandler.registerServerPacket(PacketHandleKeyInput.class);
+        networkHandler.registerClientPacket(PacketCompleteSync.class);
         initAbilities();
         ItemRegister.instance.preInit(event);
         BlockRegister.instance.preInit(event);
@@ -95,6 +98,7 @@ public class PowerSurge extends ModBase {
 
     void initAbilities(){
         SurgeRegistry.registerAbility(new Jump());
+        SurgeRegistry.registerAbility(new Invisibility());
     }
 
     File cfg;

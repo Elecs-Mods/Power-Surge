@@ -16,6 +16,7 @@ public class ItemRegister {
 
     public void init(FMLInitializationEvent event){
         //Normal item registering
-        new AbilityItems("Jump");
+        new AbilityItems("jump");
+        new AbilityItems("invisibility");
     }
 }

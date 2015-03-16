@@ -3,6 +3,7 @@ package elec332.powersurge.eventhandlers;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import elec332.powersurge.main.PowerSurge;
+import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -25,6 +26,9 @@ public class PlayerEvents {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setIntArray("data", new int[]{SurgeData.get(event.player).getCharge(), PowerSurge.max_Charge});
             PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) event.player);
+            nbt = new NBTTagCompound();
+            SurgeData.get(event.player).saveNBTData(nbt);
+            PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketCompleteSync(nbt), (EntityPlayerMP) event.player);
         }
     }
 }

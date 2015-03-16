@@ -23,8 +23,7 @@ public class AbilityItems extends baseItem {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (player instanceof EntityPlayerMP)
-            SurgeData.get(player).addAbility(name);
+        SurgeData.get(player).addAbility(name);
         return stack; //TODO: make item disappear
     }
 }

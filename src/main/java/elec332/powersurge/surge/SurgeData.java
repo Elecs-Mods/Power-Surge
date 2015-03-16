@@ -61,7 +61,7 @@ public class SurgeData implements IExtendedEntityProperties{
             this.charge = charge;
         else
             this.charge = PowerSurge.max_Charge;
-        this.sendData();
+        this.syncSurge();
     }
 
     public void addCharge(int toAdd){
@@ -70,9 +70,19 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void addAbility(String i){
+        IAbility toAdd = SurgeRegistry.getAbilityForName(i);
         if (abilities.size() == 0)
-            selectedAbility = SurgeRegistry.getAbilityForName(i);
-        abilities.add(SurgeRegistry.getAbilityForName(i));
+            selectedAbility = toAdd;
+        if (!abilities.contains(toAdd))
+            abilities.add(toAdd);
+    }
+
+    public ArrayList<IAbility> getAbilities(){
+        return this.abilities;
+    }
+
+    public IAbility getSelectedAbility(){
+        return this.selectedAbility;
     }
 
     public void activateAbility(){
@@ -89,17 +99,27 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void pressKey(EnumKeyType type){
-        if (type == EnumKeyType.ACTIVATE) {
-            if (selectedAbility != null) {
+        if (selectedAbility != null) {
+            if (type == EnumKeyType.ACTIVATE) {
                 if (!abilityActive)
                     activateAbility();
                 else
                     deActivateAbility();
+            } else if (type == EnumKeyType.NEXT) {
+                int i = abilities.indexOf(selectedAbility);
+                if (i != (abilities.size()-1)){
+                    this.selectedAbility = abilities.get(i+1);
+                } else {
+                    this.selectedAbility = abilities.get(0);
+                }
+            } else if (type == EnumKeyType.PREVIOUS) {
+                int i = abilities.indexOf(selectedAbility);
+                if (i != 0){
+                    this.selectedAbility = abilities.get(i-1);
+                } else {
+                    this.selectedAbility = abilities.get(abilities.size()-1);
+                }
             }
-        } else if (type == EnumKeyType.NEXT){
-            //TODO: switch to next ability
-        } else if (type == EnumKeyType.PREVIOUS){
-            //TODO: switch to previous ability
         }
     }
 
@@ -112,7 +132,7 @@ public class SurgeData implements IExtendedEntityProperties{
             nbtTagCompound.setString("name", ability.getName());
             list.appendTag(nbtTagCompound);
         }
-        compound.setTag("abilities", list);
+        compound.setTag("abilities_S", list);
         if (this.selectedAbility != null)
             compound.setString("sel", this.selectedAbility.getName());
         compound.setBoolean("active", this.abilityActive);
@@ -122,7 +142,8 @@ public class SurgeData implements IExtendedEntityProperties{
     public void loadNBTData(NBTTagCompound compound) {
         if (compound != null) {
             this.charge = compound.getInteger("Charge");
-            NBTTagList abilityList = compound.getTagList("abilities", 10);
+            NBTTagList abilityList = compound.getTagList("abilities_S", 10);
+            this.abilities.clear();
             for (int i = 0; i < abilityList.tagCount(); ++i){
                 this.abilities.add(SurgeRegistry.getAbilityForName(abilityList.getCompoundTagAt(i).getString("name")));
             }
@@ -137,7 +158,7 @@ public class SurgeData implements IExtendedEntityProperties{
         this.entity = entity;
     }
 
-    private void sendData(){
+    private void syncSurge(){
         if (entity instanceof EntityPlayerMP) {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setIntArray("data", new int[]{this.getCharge()});

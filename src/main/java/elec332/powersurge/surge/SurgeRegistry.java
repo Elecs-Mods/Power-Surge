@@ -2,6 +2,7 @@ package elec332.powersurge.surge;
 
 import elec332.powersurge.api.IAbility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -17,5 +18,13 @@ public class SurgeRegistry {
 
     public static IAbility getAbilityForName(String i){
         return registry.get(i);
+    }
+
+    public static ArrayList<String> abilityArrayToString(ArrayList<IAbility> abilities){
+        ArrayList<String> ret = new ArrayList<String>();
+        for (IAbility ability : abilities){
+            ret.add(ability.getName());
+        }
+        return ret;
     }
 }
