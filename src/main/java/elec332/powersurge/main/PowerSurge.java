@@ -13,8 +13,7 @@ import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
 import elec332.core.network.NetworkHandler;
-import elec332.powersurge.abilities.Invisibility;
-import elec332.powersurge.abilities.Jump;
+import elec332.powersurge.abilities.*;
 import elec332.powersurge.eventhandlers.PlayerEvents;
 import elec332.powersurge.eventhandlers.SurgeHandler;
 import elec332.powersurge.init.BlockRegister;
@@ -99,6 +98,9 @@ public class PowerSurge extends ModBase {
     void initAbilities(){
         SurgeRegistry.registerAbility(new Jump());
         SurgeRegistry.registerAbility(new Invisibility());
+        SurgeRegistry.registerAbility(new Flight());
+        SurgeRegistry.registerAbility(new FireCharge());
+        SurgeRegistry.registerAbility(new PowerStrike());
     }
 
     File cfg;
