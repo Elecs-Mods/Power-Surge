@@ -85,6 +85,10 @@ public class SurgeData implements IExtendedEntityProperties{
         return this.selectedAbility;
     }
 
+    public boolean isAbilityActive(){
+        return this.abilityActive;
+    }
+
     public void activateAbility(){
         if (this.charge >= selectedAbility.getCost()) {
             this.abilityActive = true;
@@ -105,14 +109,14 @@ public class SurgeData implements IExtendedEntityProperties{
                     activateAbility();
                 else
                     deActivateAbility();
-            } else if (type == EnumKeyType.NEXT) {
+            } else if (type == EnumKeyType.NEXT && !abilityActive) {
                 int i = abilities.indexOf(selectedAbility);
                 if (i != (abilities.size()-1)){
                     this.selectedAbility = abilities.get(i+1);
                 } else {
                     this.selectedAbility = abilities.get(0);
                 }
-            } else if (type == EnumKeyType.PREVIOUS) {
+            } else if (type == EnumKeyType.PREVIOUS && !abilityActive) {
                 int i = abilities.indexOf(selectedAbility);
                 if (i != 0){
                     this.selectedAbility = abilities.get(i-1);

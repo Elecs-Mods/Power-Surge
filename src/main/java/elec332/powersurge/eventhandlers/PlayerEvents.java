@@ -23,12 +23,16 @@ public class PlayerEvents {
     @SubscribeEvent
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event){
         if (event.player instanceof EntityPlayerMP) {
+            SurgeData data = SurgeData.get(event.player);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setIntArray("data", new int[]{SurgeData.get(event.player).getCharge(), PowerSurge.max_Charge});
+            nbt.setIntArray("data", new int[]{data.getCharge(), PowerSurge.max_Charge});
             PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) event.player);
             nbt = new NBTTagCompound();
-            SurgeData.get(event.player).saveNBTData(nbt);
+            data.saveNBTData(nbt);
             PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketCompleteSync(nbt), (EntityPlayerMP) event.player);
+            if (data.getSelectedAbility() != null && data.isAbilityActive()){
+                data.activateAbility();
+            }
         }
     }
 }
