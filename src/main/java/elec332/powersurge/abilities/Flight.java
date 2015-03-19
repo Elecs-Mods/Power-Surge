@@ -26,6 +26,8 @@ public class Flight implements IAbility{
     @Override
     public void onDeActivated(EntityPlayerMP player) {
         player.capabilities.allowFlying = false;
+        if (player.capabilities.isFlying)
+            player.capabilities.isFlying = false;
         player.sendPlayerAbilities();
     }
 }
