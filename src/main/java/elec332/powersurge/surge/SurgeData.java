@@ -3,6 +3,7 @@ package elec332.powersurge.surge;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.lib.EnumKeyType;
 import elec332.powersurge.main.PowerSurge;
+import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -124,6 +125,7 @@ public class SurgeData implements IExtendedEntityProperties{
                     this.selectedAbility = abilities.get(abilities.size()-1);
                 }
             }
+            this.syncFully();
         }
     }
 
@@ -160,6 +162,14 @@ public class SurgeData implements IExtendedEntityProperties{
     @Override
     public void init(Entity entity, World world) {
         this.entity = entity;
+    }
+
+    public void syncFully(){
+        if (entity instanceof EntityPlayerMP) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            this.saveNBTData(nbt);
+            PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketCompleteSync(nbt), (EntityPlayerMP) this.entity);
+        }
     }
 
     private void syncSurge(){

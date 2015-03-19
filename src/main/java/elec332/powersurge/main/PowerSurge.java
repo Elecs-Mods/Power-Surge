@@ -21,6 +21,7 @@ import elec332.powersurge.init.CommandRegister;
 import elec332.powersurge.init.ItemRegister;
 import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketHandleKeyInput;
+import elec332.powersurge.network.PacketNetworkAbility;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.proxies.CommonProxy;
 import elec332.powersurge.surge.SurgeRegistry;
@@ -54,6 +55,7 @@ public class PowerSurge extends ModBase {
         networkHandler.registerClientPacket(PacketSetSurgeData.class);
         networkHandler.registerServerPacket(PacketHandleKeyInput.class);
         networkHandler.registerClientPacket(PacketCompleteSync.class);
+        networkHandler.registerClientPacket(PacketNetworkAbility.class);
         initAbilities();
         ItemRegister.instance.preInit(event);
         BlockRegister.instance.preInit(event);
@@ -101,6 +103,7 @@ public class PowerSurge extends ModBase {
         SurgeRegistry.registerAbility(new Flight());
         SurgeRegistry.registerAbility(new FireCharge());
         SurgeRegistry.registerAbility(new PowerStrike());
+        SurgeRegistry.registerAbility(new Leap());
     }
 
     File cfg;

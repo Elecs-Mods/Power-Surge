@@ -6,6 +6,7 @@ import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.surge.SurgeData;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -17,7 +18,8 @@ public class PlayerEvents {
 
     @SubscribeEvent
     public void onPlayerConstructing(EntityEvent.EntityConstructing event){
-        event.entity.registerExtendedProperties(PowerSurge.ModID, new SurgeData());
+        if (event.entity instanceof EntityPlayerMP || event.entity instanceof EntityClientPlayerMP)
+            event.entity.registerExtendedProperties(PowerSurge.ModID, new SurgeData());
     }
 
     @SubscribeEvent
@@ -27,9 +29,7 @@ public class PlayerEvents {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setIntArray("data", new int[]{data.getCharge(), PowerSurge.max_Charge});
             PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) event.player);
-            nbt = new NBTTagCompound();
-            data.saveNBTData(nbt);
-            PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketCompleteSync(nbt), (EntityPlayerMP) event.player);
+            data.syncFully();
             if (data.getSelectedAbility() != null && data.isAbilityActive()){
                 data.activateAbility();
             }
