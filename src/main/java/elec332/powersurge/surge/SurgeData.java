@@ -5,12 +5,17 @@ import elec332.powersurge.lib.EnumKeyType;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import java.util.ArrayList;
@@ -20,11 +25,11 @@ import java.util.ArrayList;
  */
 public class SurgeData implements IExtendedEntityProperties{
 
-    Entity entity;
-    int charge;
-    ArrayList<IAbility> abilities;
-    IAbility selectedAbility;
-    boolean abilityActive;
+    private Entity entity;
+    private int charge;
+    private ArrayList<IAbility> abilities;
+    private IAbility selectedAbility;
+    private boolean abilityActive;
 
     private int tickCounter = 0;
 
@@ -39,7 +44,7 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void tick(){
-        if (this.tickCounter >= 10) {
+        if (this.tickCounter >= 10 && !((EntityPlayer) entity).capabilities.isCreativeMode) {
             if (abilityActive && this.selectedAbility != null && this.charge >= this.selectedAbility.getCost() * 10)
                 this.addCharge(-(selectedAbility.getCost() * 10));
             else if (abilityActive && this.selectedAbility != null)
@@ -91,10 +96,11 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void activateAbility(){
-        if (this.charge >= selectedAbility.getCost()) {
+        if (this.charge >= selectedAbility.getCost() || ((EntityPlayer) entity).capabilities.isCreativeMode) {
             this.abilityActive = true;
             selectedAbility.onActivated((EntityPlayerMP) entity);
-            addCharge(-selectedAbility.getCost());
+            if (!((EntityPlayer) entity).capabilities.isCreativeMode)
+                addCharge(-selectedAbility.getCost());
         }
     }
 
