@@ -5,17 +5,13 @@ import elec332.powersurge.lib.EnumKeyType;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import java.util.ArrayList;

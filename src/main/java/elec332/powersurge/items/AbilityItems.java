@@ -5,7 +5,6 @@ import elec332.core.util.items.baseItem;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

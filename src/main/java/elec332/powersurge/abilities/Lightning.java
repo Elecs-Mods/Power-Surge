@@ -2,11 +2,8 @@ package elec332.powersurge.abilities;
 
 import elec332.core.player.PlayerHelper;
 import elec332.core.world.WorldHelper;
-import elec332.powersurge.api.IAbility;
 import elec332.powersurge.api.NetworkAbility;
-import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MovingObjectPosition;
 
 /**

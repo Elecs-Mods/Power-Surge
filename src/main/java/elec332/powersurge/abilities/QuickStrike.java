@@ -8,8 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import java.util.ArrayList;
-
 /**
  * Created by Elec332 on 19-3-2015.
  */

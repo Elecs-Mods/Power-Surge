@@ -1,12 +1,7 @@
 package elec332.powersurge.abilities;
 
-import elec332.powersurge.api.IAbility;
 import elec332.powersurge.api.NetworkAbility;
-import elec332.powersurge.main.PowerSurge;
-import elec332.powersurge.network.PacketNetworkAbility;
-import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 
 /**

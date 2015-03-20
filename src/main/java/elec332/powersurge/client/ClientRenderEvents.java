@@ -28,7 +28,7 @@ public class ClientRenderEvents extends GuiIngameForge{
             return;
         }
         ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-        int width = res.getScaledWidth();
+        //int width = res.getScaledWidth();
         int height = res.getScaledHeight();
         mc.getTextureManager().bindTexture(icons);
         GL11.glColor4f(0.04456778F, 0.96788767F, 0.745644F, 0.7F);

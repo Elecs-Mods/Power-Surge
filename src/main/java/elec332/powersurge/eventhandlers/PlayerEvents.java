@@ -3,7 +3,6 @@ package elec332.powersurge.eventhandlers;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import elec332.powersurge.main.PowerSurge;
-import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.client.entity.EntityClientPlayerMP;
