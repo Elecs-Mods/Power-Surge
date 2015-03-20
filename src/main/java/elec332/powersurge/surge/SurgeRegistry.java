@@ -1,12 +1,14 @@
 package elec332.powersurge.surge;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import elec332.powersurge.api.IAbility;
+import elec332.powersurge.api.IEventHandler;
 import elec332.powersurge.api.NetworkAbility;
 import elec332.powersurge.items.AbilityItems;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.util.ReportedException;
+import net.minecraftforge.common.MinecraftForge;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -27,6 +29,10 @@ public class SurgeRegistry {
             report.makeCategory("Encountered an error white trying to register ability: "+abilityName+"  The ability name isn't lowercase!");
             throw new ReportedException(report);
         }
+        if (ability instanceof IEventHandler){
+            MinecraftForge.EVENT_BUS.register(ability);
+            FMLCommonHandler.instance().bus().register(ability);
+        }
         if (ability instanceof NetworkAbility){
             networkRegistry.put(abilityName, (NetworkAbility) ability);
         }
@@ -40,11 +46,12 @@ public class SurgeRegistry {
         return networkRegistry.get(s);
     }
 
+    /*
     public static ArrayList<String> abilityArrayToString(ArrayList<IAbility> abilities){
         ArrayList<String> ret = new ArrayList<String>();
         for (IAbility ability : abilities){
             ret.add(ability.getName());
         }
         return ret;
-    }
+    }*/
 }
