@@ -104,6 +104,9 @@ public class PowerSurge extends ModBase {
         SurgeRegistry.registerAbility(new FireCharge());
         SurgeRegistry.registerAbility(new PowerStrike());
         SurgeRegistry.registerAbility(new Leap());
+        SurgeRegistry.registerAbility(new QuickStrike());
+        SurgeRegistry.registerAbility(new Lightning());
+        SurgeRegistry.registerAbility(new Teleport());
     }
 
     File cfg;
