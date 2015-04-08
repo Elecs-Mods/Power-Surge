@@ -1,5 +1,6 @@
 package elec332.powersurge.abilities;
 
+import elec332.core.player.PlayerHelper;
 import elec332.powersurge.api.IAbility;
 import net.minecraft.entity.player.EntityPlayerMP;
 
@@ -19,15 +20,11 @@ public class Flight implements IAbility{
 
     @Override
     public void onActivated(EntityPlayerMP player) {
-        player.capabilities.allowFlying = true;
-        player.sendPlayerAbilities();
+        PlayerHelper.activateFlight(player);
     }
 
     @Override
     public void onDeActivated(EntityPlayerMP player) {
-        player.capabilities.allowFlying = false;
-        if (player.capabilities.isFlying)
-            player.capabilities.isFlying = false;
-        player.sendPlayerAbilities();
+        PlayerHelper.deactivateFlight(player);
     }
 }

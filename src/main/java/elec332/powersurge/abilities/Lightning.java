@@ -22,8 +22,7 @@ public class Lightning extends NetworkAbility {
 
     @Override
     public void onActivated(EntityPlayer player) {
-        MovingObjectPosition position = PlayerHelper.getPosPlayerIsLookingAt(player, 64D);
-        WorldHelper.spawnLightningAt(player.worldObj, position.blockX, position.blockY, position.blockZ);
+        WorldHelper.spawnLightningAtLookVec(player, 30.0D);
         deActivateAbility(player);
     }
 

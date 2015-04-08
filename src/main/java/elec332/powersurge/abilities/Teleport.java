@@ -24,13 +24,11 @@ public class Teleport implements IAbility {
 
     @Override
     public void onActivated(EntityPlayerMP player) {
-        MovingObjectPosition position = PlayerHelper.getPosPlayerIsLookingAt(player, 20.0);
-        Vec3 lookVec = player.getLookVec();
         EntityEnderPearl pearl = new EntityEnderPearl(player.worldObj, player);
         ++pearl.posY;
+        pearl.addVelocity(-0.1, -0.1, -0.1);
         player.worldObj.spawnEntityInWorld(pearl);
         SurgeData.get(player).deActivateAbility();
-
     }
 
     @Override

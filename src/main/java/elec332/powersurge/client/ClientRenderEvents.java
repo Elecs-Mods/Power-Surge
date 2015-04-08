@@ -1,6 +1,7 @@
 package elec332.powersurge.client;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import elec332.core.java.SmartArrayList;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.surge.SurgeData;
@@ -47,11 +48,15 @@ public class ClientRenderEvents extends GuiIngameForge{
             }
 
         }
-        ArrayList<IAbility> abilities = data.getAbilities();
-        int selectedAbilityIndex = abilities.indexOf(data.getSelectedAbility());
-        if (data.getAbilities().size() == 0){
+        SmartArrayList<IAbility> abilities = data.getAbilities();
+        if (abilities.isEmpty()){
             return;
-        } else if (selectedAbilityIndex != 0 && selectedAbilityIndex != (abilities.size()-1)){
+        } else {
+            RenderAbilityText(abilities.getNext(data.getSelectedAbility()).getName(), data.getSelectedAbility().getName(), abilities.getPrevious(data.getSelectedAbility()).getName());
+        }
+
+
+        /*if (selectedAbilityIndex != 0 && selectedAbilityIndex != (abilities.size()-1)){
             RenderAbilityText(abilities.get(selectedAbilityIndex - 1).getName(), abilities.get(selectedAbilityIndex).getName(), abilities.get(selectedAbilityIndex+1).getName());
         } else if (selectedAbilityIndex == 0 && abilities.size() >= 2){
             RenderAbilityText(abilities.get(abilities.size()-1).getName(), abilities.get(selectedAbilityIndex).getName(), abilities.get(selectedAbilityIndex+1).getName());
@@ -62,7 +67,7 @@ public class ClientRenderEvents extends GuiIngameForge{
             RenderAbilityText(name, name, name);
         } else {
             PowerSurge.instance.error("ERROR: COULDN'T RENDER THE NAMES FOR THE ABILITIES");
-        }
+        }*/
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); //*/

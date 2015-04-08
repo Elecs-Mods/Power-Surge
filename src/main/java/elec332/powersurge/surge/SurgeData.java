@@ -1,5 +1,7 @@
 package elec332.powersurge.surge;
 
+import elec332.core.java.SmartArrayList;
+import elec332.core.player.PlayerHelper;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.lib.EnumKeyType;
 import elec332.powersurge.main.PowerSurge;
@@ -14,8 +16,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import java.util.ArrayList;
-
 /**
  * Created by Elec332 on 12-3-2015.
  */
@@ -23,7 +23,7 @@ public class SurgeData implements IExtendedEntityProperties{
 
     private Entity entity;
     private int charge;
-    private ArrayList<IAbility> abilities;
+    private SmartArrayList<IAbility> abilities;
     private IAbility selectedAbility;
     private boolean abilityActive;
 
@@ -31,7 +31,7 @@ public class SurgeData implements IExtendedEntityProperties{
 
     public SurgeData(){
         this.charge = 0;
-        this.abilities = new ArrayList<IAbility>();
+        this.abilities = new SmartArrayList<IAbility>();
         this.abilityActive = false;
     }
 
@@ -40,7 +40,7 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void tick(){
-        if (this.tickCounter >= 10 && !((EntityPlayer) entity).capabilities.isCreativeMode) {
+        if (this.tickCounter >= 10 && !PlayerHelper.isPlayerInCreative((EntityPlayer) entity)) {
             if (abilityActive && this.selectedAbility != null && this.charge >= this.selectedAbility.getCost() * 10)
                 this.addCharge(-(selectedAbility.getCost() * 10));
             else if (abilityActive && this.selectedAbility != null)
@@ -73,13 +73,13 @@ public class SurgeData implements IExtendedEntityProperties{
 
     public void addAbility(String i){
         IAbility toAdd = SurgeRegistry.getAbilityForName(i);
-        if (abilities.size() == 0)
+        if (abilities.isEmpty())
             selectedAbility = toAdd;
         if (!abilities.contains(toAdd))
             abilities.add(toAdd);
     }
 
-    public ArrayList<IAbility> getAbilities(){
+    public SmartArrayList<IAbility> getAbilities(){
         return this.abilities;
     }
 
@@ -92,10 +92,10 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void activateAbility(){
-        if (this.charge >= selectedAbility.getCost() || ((EntityPlayer) entity).capabilities.isCreativeMode) {
+        if (this.charge >= selectedAbility.getCost() || PlayerHelper.isPlayerInCreative((EntityPlayer) entity)) {
             this.abilityActive = true;
             selectedAbility.onActivated((EntityPlayerMP) entity);
-            if (!((EntityPlayer) entity).capabilities.isCreativeMode)
+            if (!PlayerHelper.isPlayerInCreative((EntityPlayer) entity))
                 addCharge(-selectedAbility.getCost());
         }
     }
@@ -113,19 +113,9 @@ public class SurgeData implements IExtendedEntityProperties{
                 else
                     deActivateAbility();
             } else if (type == EnumKeyType.NEXT && !abilityActive) {
-                int i = abilities.indexOf(selectedAbility);
-                if (i != (abilities.size()-1)){
-                    this.selectedAbility = abilities.get(i+1);
-                } else {
-                    this.selectedAbility = abilities.get(0);
-                }
+                this.selectedAbility = abilities.getNext(selectedAbility);
             } else if (type == EnumKeyType.PREVIOUS && !abilityActive) {
-                int i = abilities.indexOf(selectedAbility);
-                if (i != 0){
-                    this.selectedAbility = abilities.get(i-1);
-                } else {
-                    this.selectedAbility = abilities.get(abilities.size()-1);
-                }
+                this.selectedAbility = abilities.getPrevious(selectedAbility);
             }
             this.syncFully();
         }

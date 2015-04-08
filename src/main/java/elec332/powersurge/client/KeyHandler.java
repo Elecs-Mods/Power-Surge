@@ -19,7 +19,7 @@ public class KeyHandler extends KeyHandlerBase {
 
     public KeyBinding key1 = makeKeyBinding("Activate", Keyboard.KEY_M);
     public KeyBinding key2 = makeKeyBinding("Previous", Keyboard.KEY_LBRACKET);
-    public KeyBinding key3 = makeKeyBinding("next", Keyboard.KEY_RBRACKET);
+    public KeyBinding key3 = makeKeyBinding("Next", Keyboard.KEY_RBRACKET);
 
     public void init(){
         registerKeyBinding(key1);
