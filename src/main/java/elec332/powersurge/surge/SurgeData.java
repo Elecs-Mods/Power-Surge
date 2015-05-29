@@ -4,6 +4,7 @@ import elec332.core.java.SmartArrayList;
 import elec332.core.player.PlayerHelper;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.lib.EnumKeyType;
+import elec332.powersurge.main.Config;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketCompleteSync;
 import elec332.powersurge.network.PacketSetSurgeData;
@@ -59,10 +60,10 @@ public class SurgeData implements IExtendedEntityProperties{
     }
 
     public void setCharge(int charge) {
-        if (charge <= PowerSurge.max_Charge)
+        if (charge <= Config.max_Charge)
             this.charge = charge;
         else
-            this.charge = PowerSurge.max_Charge;
+            this.charge = Config.max_Charge;
         this.syncSurge();
     }
 

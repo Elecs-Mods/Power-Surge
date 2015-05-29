@@ -34,7 +34,7 @@ public class QuickStrike implements IAbility, IEventHandler{
     public void onHit(LivingHurtEvent event) {
         if (event.source.getEntity() instanceof EntityPlayer && AbilityHelper.doesPlayerHaveAbility((EntityPlayerMP) event.source.getEntity(), this)) {
             if (event.entityLiving.hurtResistantTime > 15)
-                event.entityLiving.hurtResistantTime -= 3;
+                event.entityLiving.hurtResistantTime -= 13;
         }
     }
 }

@@ -3,6 +3,7 @@ package elec332.powersurge.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import elec332.core.network.AbstractPacket;
+import elec332.powersurge.main.Config;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.client.Minecraft;
@@ -26,11 +27,11 @@ public class PacketSetSurgeData extends AbstractPacket {
         int[] d = message.networkPackageObject.getIntArray("data");
         if (d.length >= 1) {
             SurgeData.get(Minecraft.getMinecraft().thePlayer).setCharge(d[0]);
-            PowerSurge.instance.info("Set surge to: "+ d[0]);
+            PowerSurge.logger.info("Set surge to: "+ d[0]);
         }
         if (d.length >= 2) {
-            PowerSurge.max_Charge = d[1];
-            PowerSurge.instance.info("Received data from server: "+ d[1]);
+            Config.max_Charge = d[1];
+            PowerSurge.logger.info("Received data from server: "+ d[1]);
         }
         return null;
     }

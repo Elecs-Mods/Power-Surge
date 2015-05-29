@@ -1,6 +1,7 @@
 package elec332.powersurge.eventhandlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import elec332.powersurge.main.Config;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -16,7 +17,7 @@ public class SurgeHandler {
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             SurgeData data = SurgeData.get(player);
-            data.addCharge((int) event.entityLiving.getMaxHealth()*100);
+            data.addCharge((int) event.entityLiving.getMaxHealth()* Config.surge_health_factor);
         }
     }
 

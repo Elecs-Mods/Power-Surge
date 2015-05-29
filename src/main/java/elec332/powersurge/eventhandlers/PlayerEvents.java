@@ -2,6 +2,7 @@ package elec332.powersurge.eventhandlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import elec332.powersurge.main.Config;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.surge.SurgeData;
@@ -26,7 +27,7 @@ public class PlayerEvents {
         if (event.player instanceof EntityPlayerMP) {
             SurgeData data = SurgeData.get(event.player);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setIntArray("data", new int[]{data.getCharge(), PowerSurge.max_Charge});
+            nbt.setIntArray("data", new int[]{data.getCharge(), Config.max_Charge});
             PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) event.player);
             data.syncFully();
             if (data.getSelectedAbility() != null && data.isAbilityActive()){

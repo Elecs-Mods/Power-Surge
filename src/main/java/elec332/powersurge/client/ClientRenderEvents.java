@@ -3,6 +3,7 @@ package elec332.powersurge.client;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import elec332.core.java.SmartArrayList;
 import elec332.powersurge.api.IAbility;
+import elec332.powersurge.main.Config;
 import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.client.Minecraft;
@@ -40,7 +41,7 @@ public class ClientRenderEvents extends GuiIngameForge{
 
         if (mc.playerController.gameIsSurvivalOrAdventure()) {
             short barWidth = 182;
-            int filled = (int)(((float)data.getCharge() / PowerSurge.max_Charge) * (float)(barWidth + 1));
+            int filled = (int)(((float)data.getCharge() / Config.max_Charge) * (float)(barWidth + 1));
             int top = height - 32 + 3;
             drawTexturedModalRect(5, top, 0, 64, barWidth, 5);
             if (filled > 0) {
