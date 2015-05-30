@@ -46,6 +46,7 @@ public class PowerSurge{
     public static NetworkHandler networkHandler;
     public static ConfigWrapper configWrapper;
     public static Logger logger;
+    public static Configuration surgeConfig;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -60,6 +61,8 @@ public class PowerSurge{
         BlockRegister.instance.preInit(event);
         configWrapper.registerConfig(new Config());
         configWrapper.refresh();
+        surgeConfig = ConfigWrapper.wrapCategoryAsConfig(configWrapper.getConfiguration(), "Abilities");
+        registerAbilities();
 
         //setting up mod stuff
 
@@ -93,7 +96,7 @@ public class PowerSurge{
     }
 
 
-    static {
+    private void registerAbilities(){
         SurgeRegistry.registerAbility(new Jump());
         SurgeRegistry.registerAbility(new Invisibility());
         SurgeRegistry.registerAbility(new Flight());
