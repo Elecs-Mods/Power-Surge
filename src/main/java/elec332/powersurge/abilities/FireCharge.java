@@ -1,6 +1,6 @@
 package elec332.powersurge.abilities;
 
-import elec332.powersurge.api.IAbility;
+import elec332.powersurge.api.AbstractAbility;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -9,14 +9,15 @@ import net.minecraft.util.Vec3;
 /**
  * Created by Elec332 on 17-3-2015.
  */
-public class FireCharge implements IAbility {
+public class FireCharge extends AbstractAbility {
+
     @Override
     public String getName() {
         return "firecharge";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 300;
     }
 
@@ -38,4 +39,5 @@ public class FireCharge implements IAbility {
     @Override
     public void onDeActivated(EntityPlayerMP player) {
     }
+
 }

@@ -8,13 +8,14 @@ import net.minecraft.util.MathHelper;
  * Created by Elec332 on 18-3-2015.
  */
 public class Leap extends NetworkAbility {
+
     @Override
     public String getName() {
         return "leap";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 400;
     }
 
@@ -36,4 +37,5 @@ public class Leap extends NetworkAbility {
     @Override
     public void onDeActivated(EntityPlayer player) {
     }
+
 }

@@ -8,13 +8,14 @@ import net.minecraft.entity.player.EntityPlayer;
  * Created by Elec332 on 20-3-2015.
  */
 public class Lightning extends NetworkAbility {
+
     @Override
     public String getName() {
         return "lightning";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 1200;
     }
 
@@ -31,6 +32,6 @@ public class Lightning extends NetworkAbility {
 
     @Override
     public void onDeActivated(EntityPlayer player) {
-
     }
+
 }

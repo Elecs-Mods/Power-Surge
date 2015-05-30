@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 /**
  * Created by Elec332 on 18-3-2015.
  */
-public abstract class NetworkAbility implements IAbility {
+public abstract class NetworkAbility extends AbstractAbility {
 
     @Override
     public void onActivated(EntityPlayerMP player) {

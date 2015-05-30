@@ -1,6 +1,7 @@
 package elec332.powersurge.abilities;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import elec332.powersurge.api.AbstractAbility;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.api.IEventHandler;
 import elec332.powersurge.surge.AbilityHelper;
@@ -11,20 +12,16 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 /**
  * Created by Elec332 on 19-3-2015.
  */
-public class QuickStrike implements IAbility, IEventHandler{
+public class QuickStrike extends AbstractAbility implements IEventHandler{
+
     @Override
     public String getName() {
         return "quickstrike";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 8;
-    }
-
-    @Override
-    public int getCoolDownTime() {
-        return 0;
     }
 
     @Override
@@ -42,4 +39,5 @@ public class QuickStrike implements IAbility, IEventHandler{
                 event.entityLiving.hurtResistantTime -= 13;
         }
     }
+
 }

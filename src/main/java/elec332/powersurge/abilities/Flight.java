@@ -1,26 +1,22 @@
 package elec332.powersurge.abilities;
 
 import elec332.core.player.PlayerHelper;
-import elec332.powersurge.api.IAbility;
+import elec332.powersurge.api.AbstractAbility;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
  * Created by Elec332 on 17-3-2015.
  */
-public class Flight implements IAbility{
+public class Flight extends AbstractAbility {
+
     @Override
     public String getName() {
         return "flight";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 9;
-    }
-
-    @Override
-    public int getCoolDownTime() {
-        return 0;
     }
 
     @Override
@@ -32,4 +28,5 @@ public class Flight implements IAbility{
     public void onDeActivated(EntityPlayerMP player) {
         PlayerHelper.deactivateFlight(player);
     }
+
 }

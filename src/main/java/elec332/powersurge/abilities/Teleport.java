@@ -1,5 +1,6 @@
 package elec332.powersurge.abilities;
 
+import elec332.powersurge.api.AbstractAbility;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.item.EntityEnderPearl;
@@ -8,20 +9,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 /**
  * Created by Elec332 on 20-3-2015.
  */
-public class Teleport implements IAbility {
+public class Teleport extends AbstractAbility {
+
     @Override
     public String getName() {
         return "teleport";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 1500;
-    }
-
-    @Override
-    public int getCoolDownTime() {
-        return 0;
     }
 
     @Override
@@ -35,6 +32,6 @@ public class Teleport implements IAbility {
 
     @Override
     public void onDeActivated(EntityPlayerMP player) {
-
     }
+
 }

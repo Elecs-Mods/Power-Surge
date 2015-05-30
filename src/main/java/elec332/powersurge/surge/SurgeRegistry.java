@@ -26,6 +26,8 @@ public class SurgeRegistry {
         if (ability.enabled() && abilityName.equals(abilityName.toLowerCase()) || abilityName.contains(" ")) {
             registry.put(abilityName, ability);
             itemRegistry.put(abilityName, new AbilityItems(abilityName));
+            ability.getCost();          //Call in case this value is configurable
+            ability.getCoolDownTime();  //Call in case this value is configurable
         } else if (ability.enabled()){
             CrashReport report = new CrashReport("Registering Ability", new Exception());
             report.makeCategory("Encountered an error white trying to register ability: "+abilityName+"  The ability name isn't lowercase!");

@@ -1,6 +1,6 @@
 package elec332.powersurge.abilities;
 
-import elec332.powersurge.api.IAbility;
+import elec332.powersurge.api.AbstractAbility;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -9,20 +9,16 @@ import net.minecraft.potion.PotionEffect;
 /**
  * Created by Elec332 on 14-3-2015.
  */
-public class Jump implements IAbility {
+public class Jump extends AbstractAbility {
+
     @Override
     public String getName() {
         return "jump";
     }
 
     @Override
-    public int getCost() {
+    public int getBaseCost() {
         return 200;
-    }
-
-    @Override
-    public int getCoolDownTime() {
-        return 0;
     }
 
     @Override
@@ -33,6 +29,6 @@ public class Jump implements IAbility {
 
     @Override
     public void onDeActivated(EntityPlayerMP player) {
-        //Nope
     }
+
 }
