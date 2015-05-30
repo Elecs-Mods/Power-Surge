@@ -19,6 +19,11 @@ public class Leap extends NetworkAbility {
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 100;
+    }
+
+    @Override
     public void onActivated(EntityPlayer player) {
         player.setSprinting(true);
         player.motionY += 0.56f;

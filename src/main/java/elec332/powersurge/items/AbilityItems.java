@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 public class AbilityItems extends BaseItem {
     public AbilityItems(String abilityName) {
         super(abilityName, ElecCTab.ElecTab, PowerSurge.ModID);
+        setTextureName(PowerSurge.ModID+":vial");
         setMaxStackSize(1);
         this.name = abilityName;
     }
@@ -23,6 +24,6 @@ public class AbilityItems extends BaseItem {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         SurgeData.get(player).addAbility(name);
-        return stack; //TODO: make item disappear
+        return player.inventory.decrStackSize(player.inventory.currentItem, 1);
     }
 }

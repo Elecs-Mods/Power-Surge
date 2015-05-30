@@ -19,6 +19,11 @@ public class Flight implements IAbility{
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 0;
+    }
+
+    @Override
     public void onActivated(EntityPlayerMP player) {
         PlayerHelper.activateFlight(player);
     }

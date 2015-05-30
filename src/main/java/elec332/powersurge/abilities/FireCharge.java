@@ -21,6 +21,11 @@ public class FireCharge implements IAbility {
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 20;
+    }
+
+    @Override
     public void onActivated(EntityPlayerMP player) {
         Vec3 lookVec = player.getLookVec();
         EntityLargeFireball charge = new EntityLargeFireball(player.getServerForPlayer(), player, lookVec.xCoord * 20.0D, lookVec.yCoord * 20.0D, lookVec.zCoord * 20.0D);

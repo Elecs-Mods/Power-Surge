@@ -1,6 +1,5 @@
 package elec332.powersurge.main;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -11,7 +10,6 @@ import elec332.core.config.ConfigWrapper;
 import elec332.core.helper.FileHelper;
 import elec332.core.helper.MCModInfo;
 import elec332.core.helper.ModInfoHelper;
-import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.ModInfo;
 import elec332.core.network.NetworkHandler;
 import elec332.core.util.EventHelper;
@@ -27,11 +25,8 @@ import elec332.powersurge.network.PacketNetworkAbility;
 import elec332.powersurge.network.PacketSetSurgeData;
 import elec332.powersurge.proxies.CommonProxy;
 import elec332.powersurge.surge.SurgeRegistry;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 /**
  * Created by Elec332 on 24-2-2015.

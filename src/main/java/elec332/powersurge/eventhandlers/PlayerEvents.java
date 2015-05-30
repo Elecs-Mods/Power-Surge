@@ -35,4 +35,18 @@ public class PlayerEvents {
             }
         }
     }
+
+    @SubscribeEvent
+    public void onDimensionChanged(PlayerEvent.PlayerChangedDimensionEvent event){
+        if (event.player instanceof EntityPlayerMP) {
+            SurgeData data = SurgeData.get(event.player);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setIntArray("data", new int[]{data.getCharge(), Config.max_Charge});
+            PowerSurge.networkHandler.getNetworkWrapper().sendTo(new PacketSetSurgeData(nbt), (EntityPlayerMP) event.player);
+            data.syncFully();
+            if (data.getSelectedAbility() != null && data.isAbilityActive()){
+                data.activateAbility();
+            }
+        }
+    }
 }

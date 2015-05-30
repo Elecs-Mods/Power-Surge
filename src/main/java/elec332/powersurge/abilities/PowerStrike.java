@@ -12,12 +12,17 @@ import net.minecraft.potion.PotionEffect;
 public class PowerStrike implements IAbility {
     @Override
     public String getName() {
-        return "power strike";
+        return "powerstrike";
     }
 
     @Override
     public int getCost() {
         return 500;
+    }
+
+    @Override
+    public int getCoolDownTime() {
+        return 0;
     }
 
     @Override

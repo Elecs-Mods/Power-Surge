@@ -11,6 +11,8 @@ public interface IAbility {
 
     public abstract int getCost();
 
+    public abstract int getCoolDownTime();
+
     public abstract void onActivated(EntityPlayerMP player);
 
     public abstract void onDeActivated(EntityPlayerMP player);

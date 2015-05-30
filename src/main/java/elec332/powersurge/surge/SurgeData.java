@@ -29,6 +29,7 @@ public class SurgeData implements IExtendedEntityProperties{
     private boolean abilityActive;
 
     private int tickCounter = 0;
+    private int coolDownTimer = 0;
 
     public SurgeData(){
         this.charge = 0;
@@ -46,12 +47,14 @@ public class SurgeData implements IExtendedEntityProperties{
                 this.addCharge(-(selectedAbility.getCost() * 10));
             else if (abilityActive && this.selectedAbility != null)
                 deActivateAbility();
-            else if (this.charge > 10)
-                this.addCharge(-10);
+            else if (this.charge > Config.tick_decrease_factor/2)
+                this.addCharge(-(Config.tick_decrease_factor/2));
             else if (this.charge != 0)
                 this.setCharge(0);
             this.tickCounter = 0;
         }
+        if (this.coolDownTimer > 0)
+            this.coolDownTimer--;
         this.tickCounter++;
     }
 
@@ -103,12 +106,13 @@ public class SurgeData implements IExtendedEntityProperties{
 
     public void deActivateAbility(){
         this.abilityActive = false;
+        this.coolDownTimer = selectedAbility.getCoolDownTime();
         selectedAbility.onDeActivated((EntityPlayerMP) entity);
     }
 
     public void pressKey(EnumKeyType type){
         if (selectedAbility != null) {
-            if (type == EnumKeyType.ACTIVATE) {
+            if (type == EnumKeyType.ACTIVATE && coolDownTimer == 0) {
                 if (!abilityActive)
                     activateAbility();
                 else

@@ -23,6 +23,11 @@ public class QuickStrike implements IAbility, IEventHandler{
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 0;
+    }
+
+    @Override
     public void onActivated(EntityPlayerMP player) {
     }
 

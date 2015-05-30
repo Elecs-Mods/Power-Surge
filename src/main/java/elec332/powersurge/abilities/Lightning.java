@@ -1,10 +1,8 @@
 package elec332.powersurge.abilities;
 
-import elec332.core.player.PlayerHelper;
 import elec332.core.world.WorldHelper;
 import elec332.powersurge.api.NetworkAbility;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MovingObjectPosition;
 
 /**
  * Created by Elec332 on 20-3-2015.
@@ -18,6 +16,11 @@ public class Lightning extends NetworkAbility {
     @Override
     public int getCost() {
         return 1200;
+    }
+
+    @Override
+    public int getCoolDownTime() {
+        return 50;
     }
 
     @Override

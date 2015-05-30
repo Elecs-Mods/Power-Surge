@@ -21,6 +21,11 @@ public class Invisibility implements IAbility {
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 0;
+    }
+
+    @Override
     public void onActivated(EntityPlayerMP player) {
         player.addPotionEffect(new PotionEffect(Potion.invisibility.getId(), 200, 5));
         SurgeData.get(player).deActivateAbility();

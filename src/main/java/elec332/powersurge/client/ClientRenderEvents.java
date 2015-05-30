@@ -4,7 +4,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import elec332.core.java.SmartArrayList;
 import elec332.powersurge.api.IAbility;
 import elec332.powersurge.main.Config;
-import elec332.powersurge.main.PowerSurge;
 import elec332.powersurge.surge.SurgeData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -12,8 +11,6 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
 
 /**
  * Created by Elec332 on 12-3-2015.

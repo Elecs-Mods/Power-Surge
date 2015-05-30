@@ -21,6 +21,11 @@ public class Jump implements IAbility {
     }
 
     @Override
+    public int getCoolDownTime() {
+        return 0;
+    }
+
+    @Override
     public void onActivated(EntityPlayerMP player) {
         player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 400, 5));
         SurgeData.get(player).deActivateAbility();
