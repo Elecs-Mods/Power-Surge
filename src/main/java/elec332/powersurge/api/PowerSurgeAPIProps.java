@@ -6,7 +6,7 @@ package elec332.powersurge.api;
 public class PowerSurgeAPIProps {
     public static final String owner = "PowerSurge";
     public static final String APIName = "PowerSurge-API";
-    public static final String APIVersion = "1.0.2";
+    public static final String APIVersion = "1.0.3";
 
     public static void registerAbility(IAbility ability){
         try {
