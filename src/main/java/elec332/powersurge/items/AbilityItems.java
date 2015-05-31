@@ -23,7 +23,8 @@ public class AbilityItems extends BaseItem {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        SurgeData.get(player).addAbility(name);
-        return player.inventory.decrStackSize(player.inventory.currentItem, 1);
+        if(SurgeData.get(player).addAbility(name))
+            return player.inventory.decrStackSize(player.inventory.currentItem, 1);
+        return stack;
     }
 }

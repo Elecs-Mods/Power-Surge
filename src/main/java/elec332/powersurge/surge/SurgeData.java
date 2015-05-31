@@ -75,12 +75,15 @@ public class SurgeData implements IExtendedEntityProperties{
         this.setCharge(newCharge);
     }
 
-    public void addAbility(String i){
+    public boolean addAbility(String i){
         IAbility toAdd = SurgeRegistry.getAbilityForName(i);
         if (abilities.isEmpty())
             selectedAbility = toAdd;
-        if (!abilities.contains(toAdd))
+        if (!abilities.contains(toAdd)) {
             abilities.add(toAdd);
+            return true;
+        }
+        return false;
     }
 
     public SmartArrayList<IAbility> getAbilities(){

@@ -7,3 +7,7 @@ item.PowerSurge.quickstrike=QuickStrike
 item.PowerSurge.lightning=Lightning
 item.PowerSurge.teleport.name=Teleport
 item.PowerSurge.powerstrike.name=PowerStrike
+item.PowerSurge.waterbreath.name=WaterBreathing
+item.PowerSurge.climb.name=Climb
+item.PowerSurge.quickswim.name=Quick Swimming
+item.PowerSurge.fireresistance.name=FireResistance

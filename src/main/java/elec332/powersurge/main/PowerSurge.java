@@ -29,6 +29,7 @@ import elec332.powersurge.surge.SurgeRegistry;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
@@ -112,14 +113,22 @@ public class PowerSurge{
         SurgeRegistry.registerAbility(new QuickStrike());
         SurgeRegistry.registerAbility(new Lightning());
         SurgeRegistry.registerAbility(new Teleport());
+        SurgeRegistry.registerAbility(new WaterBreath());
+        SurgeRegistry.registerAbility(new Climb());
+        SurgeRegistry.registerAbility(new QuickSwimming());
+        SurgeRegistry.registerAbility(new FireResistance());
+        SurgeDropsHandler.registerDrop(EntityCaveSpider.class, "climb", 0.03f);
         SurgeDropsHandler.registerDrop(EntityBlaze.class, "firecharge", 0.05f);
-        SurgeDropsHandler.registerDrop(EntityWither.class, "flight", 0.23f);
+        SurgeDropsHandler.registerDrop(EntityMagmaCube.class, "fireresistance", 0.01f);
+        SurgeDropsHandler.registerDrop(EntityWither.class, "flight", 0.18f);
         SurgeDropsHandler.registerDrop(EntityGhast.class, "invisibility", 0.12f);
         SurgeDropsHandler.registerDrop(EntityPigZombie.class, "jump", 0.08f);
         SurgeDropsHandler.registerDrop(EntityGhast.class, "leap", 0.09f);
-        SurgeDropsHandler.registerDrop(SurgeDropsHandler.getIdentifierClassForChargedCreeper(), "lightning", 0.3f);
-        SurgeDropsHandler.registerDrop(SurgeDropsHandler.getIdentifierClassForWitherSkeleton(), "powerstrike", 0.2f);
-        SurgeDropsHandler.registerDrop(EntityWither.class, "quickstrike", 0.17f);
+        SurgeDropsHandler.registerDrop(SurgeDropsHandler.getIdentifierClassForChargedCreeper(), "lightning", 0.23f);
+        SurgeDropsHandler.registerDrop(SurgeDropsHandler.getIdentifierClassForWitherSkeleton(), "powerstrike", 0.09f);
+        SurgeDropsHandler.registerDrop(EntityWither.class, "quickstrike", 0.12f);
+        SurgeDropsHandler.registerDrop(EntitySquid.class, "quickswimming", 0.03f);
         SurgeDropsHandler.registerDrop(EntityEnderman.class, "teleport", 0.04f);
+        SurgeDropsHandler.registerDrop(EntitySquid.class, "waterbreath", 0.04f);
     }
 }
